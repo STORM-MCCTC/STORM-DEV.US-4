@@ -1,0 +1,108 @@
+/* Font Imports */
+@font-face {
+  /* Title/Heading Font */
+  font-family: "Daydream";
+  src: url("fonts/daydream/Daydream.woff2") format("woff2"),
+       url("fonts/daydream/Daydream.otf") format("opentype"),
+       url("fonts/daydream/Daydream.ttf") format("truetype");
+}
+
+@font-face {
+  /* Main Font */
+  font-family: "minecraft";
+  src: url("fonts/minecraft/minecraft.woff2") format("woff2"),
+       url("fonts/minecraft/minecraft.otf") format("opentype"),
+       url("fonts/minecraft/minecraft.ttf") format("truetype");
+}
+
+/* Main CSS */
+.ContainerDiv {
+display: grid;
+grid-template-columns: 15% 85%;
+grid-template-rows: 10% 80% 10%;
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+height: 100vh;
+}
+
+body {
+  margin: 0;
+  color: white;
+}
+
+.HeaderDiv{ 
+    grid-area: 1 / 2 / 2 / 3; 
+    background-color: #490049;
+    padding: 5px;
+    text-align: center;
+    font-family: "Daydream";
+    font-size: x-large;
+}
+.MainContentDiv{ 
+    grid-area: 2 / 2 / 3 / 3; 
+    background-color: #6b006b;
+    padding: 5px;
+    text-align: center;
+    font-family: "minecraft";
+}
+.NavigationDiv{
+    grid-area: 1 / 1 / 4 / 2; 
+    background-color: #380038;
+    padding: 5px;
+    text-align: center;
+    font-family: "minecraft";
+    }
+.FooterDiv{
+    grid-area: 3 / 2 / 4 / 3; 
+    background-color: #490049;
+    padding: 5px;
+    text-align: center;
+    font-family: "minecraft";
+    } 
+
+.NavButton{
+  width: 70%;
+  height: 30px;
+  font-family: "minecraft";
+  border-radius: 0%;
+  margin-bottom: 15px;
+  background-color: #7e007e;
+  border-color: #c400c4;
+  color: white;
+}
+
+.NavButtonCurrent{
+  border-color: rgb(251, 201, 255);
+  background-color: #ad00ad;
+  color: white;
+}
+
+.LinkButton{
+  width: 20%;
+  height: 30px;
+  font-family: "minecraft";
+  border-radius: 0%;
+  margin-bottom: 15px;
+  border-color: rgb(251, 201, 255);
+  background-color: #ad00ad;
+  color: white;
+}
+
+ /* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;

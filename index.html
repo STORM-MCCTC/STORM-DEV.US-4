@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STORM - Version Redirect</title>
+  <script>
+    window.onload = function () {
+      let isMobileUA = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+                        .test(navigator.userAgent);
+
+      let isSmallScreen = window.innerWidth <= 768; // you can tweak this breakpoint
+
+      if (isMobileUA || isSmallScreen) {
+        // Redirect to mobile version
+        window.location.href = "Mobile/Home.html";
+      } else {
+        // Redirect to desktop version
+        window.location.href = "Desktop/link.html";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Redirecting you to the correct version...</p>
+</body>
+</html>

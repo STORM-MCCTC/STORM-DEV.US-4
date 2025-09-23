@@ -1,0 +1,107 @@
+/* Font Imports (leave as you had them) */
+@font-face {
+  font-family: "Daydream";
+  src: url("fonts/daydream/Daydream.woff2") format("woff2"),
+       url("fonts/daydream/Daydream.otf") format("opentype"),
+       url("fonts/daydream/Daydream.ttf") format("truetype");
+}
+@font-face {
+  font-family: "minecraft";
+  src: url("fonts/minecraft/minecraft.woff2") format("woff2"),
+       url("fonts/minecraft/minecraft.otf") format("opentype"),
+       url("fonts/minecraft/minecraft.ttf") format("truetype");
+}
+
+/* Reset / body */
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "minecraft", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: white;
+  background-color: #490049;
+}
+
+.ContainerDiv {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto; 
+  grid-template-columns: 1fr;         
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+
+.HeaderDiv {
+  grid-area: header;
+  background-color: #490049;
+  padding: 10px 12px;
+  text-align: center;
+  font-family: "Daydream", sans-serif;
+  font-size: 1.4rem;
+  align-self: center;
+}
+
+.MainContentDiv {
+  grid-area: main;
+  background-color: #6b006b;
+  padding: 16px;
+  text-align: center;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.FooterDiv {
+  grid-area: footer;
+  background-color: #490049;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.LinkButton {
+  width: auto;
+  width: 50%;
+  height: 36px;
+  font-family: "minecraft", monospace;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  border: 1px solid rgb(251, 201, 255);
+  background-color: #ad00ad;
+  color: white;
+  padding: 0 12px;
+}
+
+/* Desktop / wider screens */
+@media (min-width: 769px) {
+  .ContainerDiv {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10vh 1fr 10vh;
+  }
+  .HeaderDiv { font-size: 1.6rem; padding: 12px; }
+  .NavButton { height: 40px; font-size: 1.05rem; }
+}
+
+
+ /* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
