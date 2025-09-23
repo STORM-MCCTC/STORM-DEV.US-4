@@ -76,17 +76,6 @@ html, body {
   padding: 0 12px;
 }
 
-/* Desktop / wider screens */
-@media (min-width: 769px) {
-  .ContainerDiv {
-    grid-template-columns: 1fr;
-    grid-template-rows: 10vh 1fr 10vh;
-  }
-  .HeaderDiv { font-size: 1.6rem; padding: 12px; }
-  .NavButton { height: 40px; font-size: 1.05rem; }
-}
-
-
  /* unvisited link */
 a:link {
   color: white;
@@ -105,3 +94,4 @@ a:hover {
 /* selected link */
 a:active {
   color: white;
+}
