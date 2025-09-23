@@ -38,6 +38,7 @@ body {
     font-family: "Daydream";
     font-size: x-large;
 }
+
 .MainContentDiv{ 
     grid-area: 2 / 2 / 3 / 3; 
     background-color: #6b006b;
@@ -106,4 +107,21 @@ a:hover {
 /* selected link */
 a:active {
   color: white;
+}
+
+.MainContentDivbox{
+  width: 55%; 
+  border-style: solid;
+  border-color: rgb(251, 201, 255);
+  background-color: #ad00ad;
+  border-radius: 0%;
+  font-family: "minecraft";
+  color: white;
+  margin: auto;
+}
+
+
+.headertext{
+    font-family: "Daydream";
+    font-size: x-large;
 }
