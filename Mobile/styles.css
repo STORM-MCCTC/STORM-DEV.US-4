@@ -7,9 +7,9 @@
 }
 @font-face {
   font-family: "minecraft";
-  src: url("fonts/minecraft/minecraft.woff2") format("woff2"),
-       url("fonts/minecraft/minecraft.otf") format("opentype"),
-       url("fonts/minecraft/minecraft.ttf") format("truetype");
+  src: url("fonts/minecraft/Minecraft.woff2") format("woff2"),
+       url("fonts/minecraft/Minecraft.otf") format("opentype"),
+       url("fonts/minecraft/Minecraft.ttf") format("truetype");
 }
 
 /* Reset / body */
