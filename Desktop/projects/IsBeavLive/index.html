@@ -1,59 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Is Beav Live</title>
   <style>
+    :root{
+      --bg1: #1f1c2c;
+      --bg2: #928dab;
+      --text: #fff;
+      --green: #4CAF50;
+      --red: #e53935;
+      --orange: #ff9800;
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    html,body{height:100%;margin:0;padding:0;}
     body {
-      text-align: center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: 0;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: min(720px, 96%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      text-align: center;
     }
 
     h1 {
-      margin: 0.5em 0;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.92);
     }
 
-    #live {
-      font-size: 4rem;
-      font-weight: bold;
-      margin-top: 0.5em;
-      transition: color 0.3s ease, transform 0.3s ease;
+    .status {
+      margin-top: 12px;
+      font-size: 3.2rem;
+      font-weight: 700;
+      padding: 12px 18px;
+      display:inline-block;
+      border-radius: 10px;
+      transition: transform .25s ease, color .15s ease, box-shadow .2s ease;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.45);
+      background: var(--glass);
+      min-width: 240px;
     }
 
-    #live:contains("YES") {
-      color: #4CAF50; /* green */
-      transform: scale(1.1);
+    .status.yes {
+      color: var(--green);
+      transform: scale(1.04);
+      box-shadow: 0 8px 30px rgba(76,175,80,0.12);
+    }
+    .status.no {
+      color: var(--red);
+      box-shadow: 0 8px 30px rgba(229,57,53,0.08);
+    }
+    .status.error {
+      color: var(--orange);
+      box-shadow: 0 8px 30px rgba(255,152,0,0.07);
     }
 
-    #live:contains("NO") {
-      color: #e53935; /* red */
+    .meta {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
     }
 
-    #live:contains("Error") {
-      color: #ff9800; /* orange */
+    .small {
+      font-size: 0.85rem;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.72);
     }
+
+    .muted {
+      color: rgba(255,255,255,0.5);
+    }
+
+    button { margin-left: 8px; padding: 6px 10px; border-radius:8px; border: none; cursor:pointer; background: rgba(255,255,255,0.06); color:inherit; }
   </style>
 </head>
 <body>
-  <h1>IS BIG BAD BEAVER LIVE?:</h1>
-  <h1 id="live">...</h1>
+  <div class="card" role="region" aria-label="Twitch live status">
+    <h1>IS BIG BAD BEAVER LIVE?</h1>
+
+    <div id="live" class="status muted">...</div>
+
+    <div id="meta" class="meta small">
+      <span id="game"></span>
+      <span id="viewers"></span>
+    </div>
+
+    <div class="small muted" style="margin-top:10px;">
+      Last checked: <span id="lastChecked">—</span>
+      <button id="refreshBtn" title="Check now">Refresh</button>
+      <label style="margin-left:8px;font-size:0.85rem;">
+        Auto-refresh:
+        <select id="autoRefresh" title="Auto refresh interval">
+          <option value="0">Off</option>
+          <option value="30000">30s</option>
+          <option value="60000" selected>60s</option>
+          <option value="180000">3m</option>
+        </select>
+      </label>
+    </div>
+  </div>
 
   <script>
-    const clientId = "1xgzr3i8yv0oy943jpkaokhvfuxpcl";
-    const accessToken = "iwmefxzgmmbrreyy0ukrxokqwaz39v"; 
+    const clientId = "l4klxa6j9bfm44xl53sq7iahcutw7j";
+    const accessToken = "iwmefxzgmmbrreyy0ukrxokqwaz39v";
     const username = "bigbadbeaver";
 
+    function nowString(){
+      return new Date().toLocaleString();
+    }
+
     async function checkLive(user) {
-      const url = `https://api.twitch.tv/helix/streams?user_login=${user}`;
+      const liveEl = document.getElementById("live");
+      const metaEl = document.getElementById("meta");
+      const gameEl = document.getElementById("game");
+      const viewersEl = document.getElementById("viewers");
+      const lastChecked = document.getElementById("lastChecked");
+
+      liveEl.className = "status muted";
+      liveEl.textContent = "Checking…";
+      gameEl.textContent = "";
+      viewersEl.textContent = "";
+
+      const url = `https://api.twitch.tv/helix/streams?user_login=${encodeURIComponent(user)}`;
+
       try {
         const res = await fetch(url, {
           headers: {
@@ -61,25 +145,57 @@
             "Authorization": `Bearer ${accessToken}`
           }
         });
+
+        if (!res.ok) {
+          if (res.status === 401 || res.status === 403) {
+            throw new Error(`Auth error (${res.status}). Token invalid or expired.`);
+          } else {
+            throw new Error(`HTTP ${res.status} ${res.statusText}`);
+          }
+        }
+
         const data = await res.json();
 
-        const liveEl = document.getElementById("live");
-        if (data.data && data.data.length > 0) {
+        if (Array.isArray(data.data) && data.data.length > 0) {
+          const stream = data.data[0];
+          liveEl.className = "status yes";
           liveEl.textContent = "YES :D";
-          liveEl.style.color = "#4CAF50";
+          gameEl.textContent = ` • ${stream.game_name || 'Unknown game'}`;
+          viewersEl.textContent = ` • ${stream.viewer_count ?? '—'} viewers`;
         } else {
+          liveEl.className = "status no";
           liveEl.textContent = "NO D:";
-          liveEl.style.color = "#e53935";
         }
+
       } catch (err) {
         console.error("Error checking live status:", err);
-        const liveEl = document.getElementById("live");
+        liveEl.className = "status error";
         liveEl.textContent = "Error :(";
-        liveEl.style.color = "#ff9800";
+        gameEl.textContent = ` • ${err.message}`;
+      } finally {
+        lastChecked.textContent = nowString();
       }
     }
 
+    document.getElementById("refreshBtn").addEventListener("click", () => checkLive(username));
+
+    let intervalHandle = null;
+    const autoSelect = document.getElementById("autoRefresh");
+    autoSelect.addEventListener("change", () => {
+      if (intervalHandle) {
+        clearInterval(intervalHandle);
+        intervalHandle = null;
+      }
+      const ms = Number(autoSelect.value);
+      if (ms > 0) intervalHandle = setInterval(() => checkLive(username), ms);
+    });
+
     checkLive(username);
+    (function startIfSelected(){
+      const ms = Number(autoSelect.value);
+      if (ms > 0 && !intervalHandle) intervalHandle = setInterval(() => checkLive(username), ms);
+    })();
+
   </script>
 </body>
 </html>
