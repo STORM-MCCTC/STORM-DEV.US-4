@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is Beav Live</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0;
+    }
+
+    h1 {
+      margin: 0.5em 0;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    }
+
+    #live {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-top: 0.5em;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    #live:contains("YES") {
+      color: #4CAF50; /* green */
+      transform: scale(1.1);
+    }
+
+    #live:contains("NO") {
+      color: #e53935; /* red */
+    }
+
+    #live:contains("Error") {
+      color: #ff9800; /* orange */
+    }
+  </style>
+</head>
+<body>
+  <h1>IS BIG BAD BEAVER LIVE?:</h1>
+  <h1 id="live">...</h1>
+
+  <script>
+    const clientId = "1xgzr3i8yv0oy943jpkaokhvfuxpcl";
+    const accessToken = "iwmefxzgmmbrreyy0ukrxokqwaz39v"; 
+    const username = "bigbadbeaver";
+
+    async function checkLive(user) {
+      const url = `https://api.twitch.tv/helix/streams?user_login=${user}`;
+      try {
+        const res = await fetch(url, {
+          headers: {
+            "Client-ID": clientId,
+            "Authorization": `Bearer ${accessToken}`
+          }
+        });
+        const data = await res.json();
+
+        const liveEl = document.getElementById("live");
+        if (data.data && data.data.length > 0) {
+          liveEl.textContent = "YES :D";
+          liveEl.style.color = "#4CAF50";
+        } else {
+          liveEl.textContent = "NO D:";
+          liveEl.style.color = "#e53935";
+        }
+      } catch (err) {
+        console.error("Error checking live status:", err);
+        const liveEl = document.getElementById("live");
+        liveEl.textContent = "Error :(";
+        liveEl.style.color = "#ff9800";
+      }
+    }
+
+    checkLive(username);
+  </script>
+</body>
+</html>
