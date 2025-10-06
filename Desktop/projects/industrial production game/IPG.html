@@ -17,7 +17,6 @@
             <div id="copper-controls" class="resource-controls"></div>
             <h2>Forestry Industry: </h2>
             <div id="wood-controls" class="resource-controls"></div>
-            <div id="Sawmill-controls" class="resource-controls"></div>
         </div>
         <div class="right">
             <h4>Coal</h4>
@@ -32,7 +31,7 @@
             <p id="copper_ore_count">| T1 Gen - 0 | T2 Gen - 0 | T3 Gen - 0 | 0/200 Copper Ore |</p>
             <button onclick="upgradeStorage('copper')">Upgrade storage</button>
 
-            <h4>wood</h4>
+            <h4>Wood</h4>
             <p id="wood_ore_count">| T1 Gen - 0 | T2 Gen - 0 | T3 Gen - 0 | 0/200 Wood |</p>
             <button onclick="upgradeStorage('wood')">Upgrade storage</button>
         </div>
@@ -45,6 +44,7 @@ const resources = {
     coal: { amount: 0, max: 200, tiers: [0, 0, 0] },
     iron: { amount: 0, max: 200, tiers: [0, 0, 0] },
     copper: { amount: 0, max: 200, tiers: [0, 0, 0] },
+    wood: { amount: 0, max: 200, tiers: [0, 0, 0] },
 };
 
 const tierCosts = [10, 100, 1000]; // Iron cost for T1, T2, T3 mines
