@@ -124,3 +124,70 @@ a:active {
     font-family: "Daydream";
     font-size: x-large;
 }
+
+/* Blog Container */
+.Blogcontainerdiv {
+  width: 60%;
+  border: 2px solid rgb(251, 201, 255);
+  background-color: #ad00ad;
+  color: white;
+  font-family: "minecraft";
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Blog Header */
+.BlogHeader {
+  background-color: #7e007e;
+  border-bottom: 2px solid rgb(251, 201, 255);
+  padding: 10px;
+}
+
+/* Short Description */
+.Blogshortdiv {
+  background-color: #6b006b;
+  border-top: 1px solid rgb(251, 201, 255);
+  border-bottom: 1px solid rgb(251, 201, 255);
+  padding: 10px;
+  font-size: medium;
+}
+
+/* Read More Section */
+.Readmorediv {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+/* Read More Button */
+.Readmorebutton {
+  font-family: "minecraft";
+  background-color: #7e007e;
+  border: 2px solid #c400c4;
+  color: white;
+  padding: 6px 20px;
+  cursor: pointer;
+}
+
+.Readmorebutton:hover {
+  background-color: #ad00ad;
+  border-color: rgb(251, 201, 255);
+  transition: 0.2s;
+}
+
+/* Blog Title */
+.BlogHeadertext {
+  font-family: "Daydream";
+  font-size: x-large;
+  margin: 0;
+  text-align: left;
+}
+
+/* Blog Date */
+.BlogDateTime {
+  font-family: "minecraft";
+  font-size: small;
+  color: rgb(251, 201, 255);
+  margin: 0;
+  text-align: right;
+}
