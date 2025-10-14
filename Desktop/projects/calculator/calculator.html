@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="Calculator">
+        <div class="Display">
+            <input type="text" id="display" disabled value="0">
+        </div>
+        <div class="BtnRow0">
+            <button>Clr</button>
+            <button>Del</button>
+            <button>0</button>
+        </div>
+        <div class="BtnRow1">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+        <div class="BtnRow2">
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+        </div>
+        <div class="BtnRow3">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+        </div>
+        <div class="BtnRow4">
+            <button>+</button>
+            <button>-</button>
+            <button>X</button>
+        </div>
+        <div class="BtnRow5">
+            <button>/</button>
+            <button>ans</button>
+            <button>.</button>
+        </div>
+            <div class="BtnRow6">
+            <button>=</button>
+        </div>
+        <p>STORMTEC® TI-69</p>
+    </div>
+</body>
+<script>
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('button');
+    let currentInput = '';
+    let lastAnswer = '';
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.textContent;
+
+            if (value === '=') {
+                try {
+                    const expression = currentInput.replace(/X/g, '*');
+                    lastAnswer = eval(expression).toString();
+                    display.value = lastAnswer;
+                    currentInput = lastAnswer;
+                } catch {
+                    display.value = 'Error';
+                    currentInput = '';
+                }
+            } else if (value === 'ans') {
+                currentInput += lastAnswer;
+                display.value = currentInput;
+            } else if (value === 'Clr') {
+                currentInput = '';
+                display.value = '';
+            } else if (value === 'Del') {
+                currentInput = currentInput.slice(0, -1);
+                display.value = currentInput;
+            } else {
+                currentInput += value;
+                display.value = currentInput;
+            }
+        });
+    });
+</script>
+<style>
+    @font-face {
+        font-family: "Digital-7";
+        src: url(digital-7.ttf);
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: rgb(74, 60, 78);
+    }
+    .BtnRow0, .BtnRow1, .BtnRow2, .BtnRow3, .BtnRow4, .BtnRow5, .BtnRow6 {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    button {
+        margin: 0 5px;
+        width: 50px;
+        height: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        border-style: inset;
+        border: solid;
+        border-width: 5px;
+        border-radius: 5px;
+    }
+    .Display {
+        margin: 20px;
+        background-color:  	#0f380f;
+        padding: 10px;
+        height: 40px;
+        border-color: black;
+        border: solid;
+        border-width: 5px;
+        border-radius: 15px;
+
+
+    }
+    input#display {
+        background-color:  	#0f380f;
+        border: none;
+        color: #8bac0f;
+        font-family: "Digital-7", monospace;
+        font-size: 24px;
+        width: 100%;
+    }
+    .Calculator {
+        margin: auto;
+        width: 220px;
+        height: 440px;
+        background-color: rgb(51, 52, 54);
+        border-color: black;
+        border: solid;
+        border-width: 5px;
+        border-radius: 15px;
+        text-align: center;
+    }
+    .Calculator p {
+        color: rgb(83, 83, 85);;
+    }
+</style>
+</html>
