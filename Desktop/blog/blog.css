@@ -47,3 +47,12 @@ button:hover {
     font-size: 20px;
     line-height: 1.6;
 }
+
+.CodeBlock {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    margin: 20px 0;
+}
