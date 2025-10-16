@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qr Code Generater</title>
+</head>
+<body>
+    <div class="container">
+        <p class="light_text">Input Text or a Link and Click Generate</p>
+        <input type="text" id="text" placeholder="Enter text or URL" class="inputfield">
+        <button onclick="generateQRCode()" class="generateQRCodeBtn">Generate</button>
+        <br>
+        <img id="qrcode" class="qrcode">
+        <br>
+        <p class="light_text">RightClick and Save or Click Download</p>
+        <br>
+        <button onclick="downloadQRCode()" class="DownloadBtn">Download QR</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <details>
+    <summary>Source Code</summary>
+        <pre>
+            <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Qr Code Generater&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;p class="light_text"&gt;Input Text or a Link and Click Generate&lt;/p&gt;
+        &lt;input type="text" id="text" placeholder="Enter text or URL" class="inputfield"&gt;
+        &lt;button onclick="generateQRCode()" class="generateQRCodeBtn"&gt;Generate&lt;/button&gt;
+        &lt;br&gt;
+        &lt;img id="qrcode" class="qrcode"&gt;
+        &lt;br&gt;
+        &lt;p class="light_text"&gt;RightClick and Save or Click Download&lt;/p&gt;
+        &lt;br&gt;
+        &lt;button onclick="downloadQRCode()" class="DownloadBtn"&gt;Download QR&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+</code>
+<code class="language-javascript">
+    function generateQRCode() {
+        const text = document.getElementById('text').value;
+        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}&size=200x200`;
+        document.getElementById('qrcode').src = qrCodeUrl;
+    }
+    function downloadQRCode() {
+        const qrCodeImg = document.getElementById('qrcode');
+        if (!qrCodeImg.src || qrCodeImg.src === window.location.href) {
+            alert('Please generate a QR code first.');
+            return;
+        }
+        const link = document.createElement('a');
+        link.href = qrCodeImg.src;
+        link.download = 'qrcode.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</code>
+<code class="language-HTML">
+&lt;/script&gt;
+&lt;style&gt;
+</code>
+<code class="language-css">
+    body{
+        text-align: center;
+        background-color: #595959;
+    }
+    .light_text{
+        color: #9e9e9e;
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .container{
+        display: inline-block;
+        border: 2px solid black;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #4b4b4b;
+        border-color: #303030;
+        border-width: 10px;
+    }
+    #qrcode {
+        width: 400px; 
+        height: 400px;
+        margin: 15px;
+        background-color: white;
+        border: none;
+    }
+    .inputfield {
+        width: 250px;
+        height: 50px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #303030;
+        background-color: #4b4b4b;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .generateQRCodeBtn{
+        width: 150px;
+        height: 50px;
+        background-color: rgb(0, 204, 255);
+        border-style: outset;
+        border-color: rgb(0, 94, 156);
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    .DownloadBtn{
+        width: 250px;
+        height: 50px;
+        background-color: rgb(0, 255, 0);
+        border-style: outset;
+        border-color: rgb(78, 156, 0);
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+</code>
+<code class="language-HTML">
+&lt;/style&gt;
+&lt;/html&gt;
+</code>
+            </code>
+        </pre>
+    </details>
+</body>
+<script>
+    function generateQRCode() {
+        const text = document.getElementById('text').value;
+        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(text)}&size=200x200`;
+        document.getElementById('qrcode').src = qrCodeUrl;
+    }
+    function downloadQRCode() {
+        const qrCodeImg = document.getElementById('qrcode');
+        if (!qrCodeImg.src || qrCodeImg.src === window.location.href) {
+            alert('Please generate a QR code first.');
+            return;
+        }
+        const link = document.createElement('a');
+        link.href = qrCodeImg.src;
+        link.download = 'qrcode.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<style>
+    body{
+        text-align: center;
+        background-color: #595959;
+    }
+    .light_text{
+        color: #9e9e9e;
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .container{
+        display: inline-block;
+        border: 2px solid black;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #4b4b4b;
+        border-color: #303030;
+        border-width: 10px;
+    }
+    #qrcode {
+        width: 400px; 
+        height: 400px;
+        margin: 15px;
+        background-color: white;
+        border: none;
+    }
+    .inputfield {
+        width: 250px;
+        height: 50px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #303030;
+        background-color: #4b4b4b;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .generateQRCodeBtn{
+        width: 150px;
+        height: 50px;
+        background-color: rgb(0, 204, 255);
+        border-style: outset;
+        border-color: rgb(0, 94, 156);
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    .DownloadBtn{
+        width: 250px;
+        height: 50px;
+        background-color: rgb(0, 255, 0);
+        border-style: outset;
+        border-color: rgb(78, 156, 0);
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    details {
+    margin: 30px auto;
+    width: 90%;
+    max-width: 800px;
+    background: #23272e;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0004;
+    border: 1px solid #444;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    details[open] {
+        padding-bottom: 16px;
+        text-align: left;
+    }
+
+    details summary {
+        font-size: 1.2em;
+        font-weight: bold;
+        background: #181a1b;
+        padding: 12px 20px;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+    }
+
+    details pre {
+        background: #181a1b;
+        color: #e0e0e0;
+        margin: 0;
+        padding: 20px;
+        border-radius: 0 0 8px 8px;
+        overflow-x: auto;
+        font-size: 1em;
+        line-height: 1.5;
+        box-shadow: none;
+        border: none;
+    }
+
+    details code {
+        font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+        font-size: 1em;
+        background: none;
+        padding: 0;
+        border: none;
+    }
+</style>
+</html>
