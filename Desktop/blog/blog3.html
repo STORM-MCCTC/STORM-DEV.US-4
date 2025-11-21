@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog3.html</title>
+    <link href="blog.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="ControlDiv">
+        <button onclick="toggleBackground()">Toggle Light Mode</button>
+    </div>
+    <div class="HeaderDiv">
+        <h1>Inbedded Code test</h1>
+    </div>
+    <div class="MainContentDiv">
+        <p>This is code from my most recent little project, just a simple Calculator. Im making this to test imbedding code into an HTML document.</p>
+        <div class="CodeBlock">
+            <pre>
+                <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Calculator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="Calculator"&gt;
+        &lt;div class="Display"&gt;
+            &lt;input type="text" id="display" disabled value="0"&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow0"&gt;
+            &lt;button&gt;Clr&lt;/button&gt;
+            &lt;button&gt;Del&lt;/button&gt;
+            &lt;button&gt;0&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow1"&gt;
+            &lt;button&gt;1&lt;/button&gt;
+            &lt;button&gt;2&lt;/button&gt;
+            &lt;button&gt;3&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow2"&gt;
+            &lt;button&gt;4&lt;/button&gt;
+            &lt;button&gt;5&lt;/button&gt;
+            &lt;button&gt;6&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow3"&gt;
+            &lt;button&gt;7&lt;/button&gt;
+            &lt;button&gt;8&lt;/button&gt;
+            &lt;button&gt;9&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow4"&gt;
+            &lt;button&gt;+&lt;/button&gt;
+            &lt;button&gt;-&lt;/button&gt;
+            &lt;button&gt;X&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="BtnRow5"&gt;
+            &lt;button&gt;/&lt;/button&gt;
+            &lt;button&gt;ans&lt;/button&gt;
+            &lt;button&gt;.&lt;/button&gt;
+        &lt;/div&gt;
+            &lt;div class="BtnRow6"&gt;
+            &lt;button&gt;=&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;p&gt;STORMTEC® TI-69&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+</code>
+<code class="language-javascript">
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('button');
+    let currentInput = '';
+    let lastAnswer = '';
+
+    buttons.forEach(button =&gt; {
+        button.addEventListener('click', () =&gt; {
+            const value = button.textContent;
+
+            if (value === '=') {
+                try {
+                    const expression = currentInput.replace(/X/g, '*');
+                    lastAnswer = eval(expression).toString();
+                    display.value = lastAnswer;
+                    currentInput = lastAnswer;
+                } catch {
+                    display.value = 'Error';
+                    currentInput = '';
+                }
+            } else if (value === 'ans') {
+                currentInput += lastAnswer;
+                display.value = currentInput;
+            } else if (value === 'Clr') {
+                currentInput = '';
+                display.value = '';
+            } else if (value === 'Del') {
+                currentInput = currentInput.slice(0, -1);
+                display.value = currentInput;
+            } else {
+                currentInput += value;
+                display.value = currentInput;
+            }
+        });
+    });
+</code>
+<code class="language-html">
+&lt;/script&gt;
+&lt;style&gt;
+</code>
+<code class="language-css">
+    @font-face {
+        font-family: "Digital-7";
+        src: url(digital-7.ttf);
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: rgb(74, 60, 78);
+    }
+    .BtnRow0, .BtnRow1, .BtnRow2, .BtnRow3, .BtnRow4, .BtnRow5, .BtnRow6 {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    button {
+        margin: 0 5px;
+        width: 50px;
+        height: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        border-style: inset;
+        border: solid;
+        border-width: 5px;
+        border-radius: 5px;
+    }
+    .Display {
+        margin: 20px;
+        background-color:  	#0f380f;
+        padding: 10px;
+        height: 40px;
+        border-color: black;
+        border: solid;
+        border-width: 5px;
+        border-radius: 15px;
+
+
+    }
+    input#display {
+        background-color:  	#0f380f;
+        border: none;
+        color: #8bac0f;
+        font-family: "Digital-7", monospace;
+        font-size: 24px;
+        width: 100%;
+    }
+    .Calculator {
+        margin: auto;
+        width: 220px;
+        height: 440px;
+        background-color: rgb(51, 52, 54);
+        border-color: black;
+        border: solid;
+        border-width: 5px;
+        border-radius: 15px;
+        text-align: center;
+    }
+    .Calculator p {
+        color: rgb(83, 83, 85);;
+    }
+</code>
+<code class="language-html">
+&lt;/style&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="toggledark.js"></script>
+</html>
